@@ -7,6 +7,7 @@ reader = STEPControl_Reader()
 tr = reader.WS().TransferReader()
 reader.ReadFile('model.stp')
 reader.TransferRoots()
+model = reader.StepModel()
 shape = reader.OneShape()
 
 
@@ -17,8 +18,9 @@ while exp.More():
 
     item = tr.EntityFromShapeResult(s, 1)
     item = StepRepr_RepresentationItem.DownCast(item)
-    name = item.Name().ToCString()
 
-    print(name)
+    label = item.Name().ToCString()
+    id = model.IdentLabel(item)
 
-    # How to access id?
+    print('label', label)
+    print('id', id)
